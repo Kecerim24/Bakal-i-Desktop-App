@@ -3,7 +3,7 @@ extends Control
 const url = "https://sluzby.bakalari.cz/api/v1/municipality/"
 var school_urls = {}
 
-func _on_Button_pressed():
+func login():
 	var addr = $schooladdress.text
 	if addr == "": 
 		$status.text = "Enter or search for a school address before logging in"
@@ -55,6 +55,7 @@ func school_selected(index):
 	var school = $SchoolSelector.get_at(index)
 	$schooladdress.text = school_urls.get(school)
 	$SchoolSelector.hide()
+	step(null,0)
 
 func city_selected(index):
 	var city = $CitySelector.get_at(index)
@@ -73,3 +74,11 @@ func find_schools():
 		else:
 			var headers = ["Accept: application/json"]
 			$city_list_req.request(url, headers)
+
+func step(_text,n):
+	if n == 0:
+		$username.grab_focus()
+	elif n == 1:
+		$password.grab_focus()
+	elif n == 2:
+		login()

@@ -18,7 +18,7 @@ anchor_bottom = 1.0
 theme = SubResource( 2 )
 script = ExtResource( 2 )
 
-[node name="Button" type="Button" parent="."]
+[node name="Login" type="Button" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -29,6 +29,18 @@ margin_right = 110.0
 margin_bottom = 150.5
 shortcut_in_tooltip = false
 text = "Log in"
+
+[node name="schooladdress" type="LineEdit" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -137.0
+margin_top = -51.0
+margin_right = 137.0
+margin_bottom = -10.0
+secret_character = "•"
+placeholder_text = "School address"
 
 [node name="username" type="LineEdit" parent="."]
 anchor_left = 0.5
@@ -53,18 +65,6 @@ margin_bottom = 99.0
 secret = true
 secret_character = "•"
 placeholder_text = "Password"
-
-[node name="schooladdress" type="LineEdit" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -137.0
-margin_top = -51.0
-margin_right = 137.0
-margin_bottom = -10.0
-secret_character = "•"
-placeholder_text = "School address"
 
 [node name="findschool" type="Button" parent="."]
 anchor_left = 0.5
@@ -117,7 +117,10 @@ valign = 1
 
 [node name="city_list_req" type="HTTPRequest" parent="."]
 
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Login" to="." method="login"]
+[connection signal="text_entered" from="schooladdress" to="." method="step" binds= [ 0 ]]
+[connection signal="text_entered" from="username" to="." method="step" binds= [ 1 ]]
+[connection signal="text_entered" from="password" to="." method="step" binds= [ 2 ]]
 [connection signal="pressed" from="findschool" to="." method="find_schools"]
 [connection signal="selected" from="CitySelector" to="." method="city_selected"]
 [connection signal="selected" from="SchoolSelector" to="." method="school_selected"]
