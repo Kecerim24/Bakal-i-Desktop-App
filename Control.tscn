@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Roboto-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Control_script.gd" type="Script" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://SearchableList.tscn" type="PackedScene" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 25
@@ -23,11 +24,11 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -110.0
-margin_top = 57.5
+margin_top = 113.5
 margin_right = 110.0
-margin_bottom = 94.5
+margin_bottom = 150.5
 shortcut_in_tooltip = false
-text = "Login"
+text = "Log in"
 
 [node name="username" type="LineEdit" parent="."]
 anchor_left = 0.5
@@ -35,9 +36,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -137.0
-margin_top = -52.0
+margin_top = 4.0
 margin_right = 137.0
-margin_bottom = -11.0
+margin_bottom = 45.0
 placeholder_text = "Username"
 
 [node name="password" type="LineEdit" parent="."]
@@ -46,12 +47,36 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -137.0
-margin_top = 2.0
+margin_top = 58.0
 margin_right = 137.0
-margin_bottom = 43.0
+margin_bottom = 99.0
 secret = true
 secret_character = "•"
 placeholder_text = "Password"
+
+[node name="schooladdress" type="LineEdit" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -137.0
+margin_top = -51.0
+margin_right = 137.0
+margin_bottom = -10.0
+secret_character = "•"
+placeholder_text = "School address"
+
+[node name="findschool" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 148.0
+margin_top = -51.0
+margin_right = 295.0
+margin_bottom = -10.0
+rect_pivot_offset = Vector2( 47, 107 )
+text = "Find school"
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchor_left = 0.5
@@ -66,29 +91,22 @@ texture = ExtResource( 3 )
 expand = true
 stretch_mode = 6
 
-[node name="city_list" type="OptionButton" parent="."]
-anchor_right = 0.299
-margin_left = 32.0
-margin_top = 33.0
-margin_right = -0.176025
-margin_bottom = 70.0
-
-[node name="school_list" type="OptionButton" parent="."]
+[node name="CitySelector" parent="." instance=ExtResource( 4 )]
 visible = false
-anchor_right = 0.299
-margin_left = 32.0
-margin_top = 98.0
-margin_right = -0.176025
-margin_bottom = 135.0
-text = "School"
-clip_text = true
+anchor_right = 0.0
+margin_right = 359.0
+
+[node name="SchoolSelector" parent="." instance=ExtResource( 4 )]
+visible = false
+anchor_right = 0.0
+margin_right = 359.0
 
 [node name="status" type="Label" parent="."]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_top = 119.0
-margin_bottom = 150.0
+margin_top = 167.0
+margin_bottom = 198.0
 custom_colors/font_color = Color( 0.701961, 0, 0, 1 )
 align = 1
 valign = 1
@@ -99,17 +117,10 @@ valign = 1
 
 [node name="city_list_req" type="HTTPRequest" parent="."]
 
-[node name="refresh" type="Button" parent="."]
-margin_left = 810.0
-margin_top = 18.0
-margin_right = 993.0
-margin_bottom = 55.0
-text = "Refresh"
-
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
-[connection signal="item_selected" from="city_list" to="." method="_on_city_list_item_selected"]
-[connection signal="item_selected" from="school_list" to="." method="_on_school_list_item_selected"]
+[connection signal="pressed" from="findschool" to="." method="find_schools"]
+[connection signal="selected" from="CitySelector" to="." method="city_selected"]
+[connection signal="selected" from="SchoolSelector" to="." method="school_selected"]
 [connection signal="request_completed" from="access_req" to="." method="_on_access_req_request_completed"]
-[connection signal="request_completed" from="school_list_req" to="." method="_on_school_list_req_request_completed"]
-[connection signal="request_completed" from="city_list_req" to="." method="_on_city_list_request_completed"]
-[connection signal="pressed" from="refresh" to="." method="_on_refresh_pressed"]
+[connection signal="request_completed" from="school_list_req" to="." method="got_school_list"]
+[connection signal="request_completed" from="city_list_req" to="." method="got_city_list"]
