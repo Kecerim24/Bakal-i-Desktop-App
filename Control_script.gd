@@ -3,15 +3,26 @@ extends Control
 const url = "https://sluzby.bakalari.cz/api/v1/municipality/"
 var school_urls = {}
 
+export(NodePath) var schooladdress
+export(NodePath) var username
+export(NodePath) var password
+export(NodePath) var status
+
+func _ready():
+	schooladdress = get_node(schooladdress)
+	username = get_node(username)
+	password = get_node(password)
+	status = get_node(status)
+
 func login():
-	var addr = $schooladdress.text
+	var addr = schooladdress.text
 	if addr == "": 
-		$status.text = "Enter or search for a school address before logging in"
+		status.text = "Enter or search for a school address before logging in"
 		return
 	Global.selected_school = addr
-	var body = "client_id=ANDR&grant_type=password&username=" + $username.text + "&password=" + $password.text
+	var body = "client_id=ANDR&grant_type=password&username=" + username.text + "&password=" + password.text
 	var header = ["Content-Type: application/x-www-form-urlencoded"]
-	$status.text = "Logging in"
+	status.text = "Logging in"
 	$access_req.request(Global.selected_school + "/api/login", header, true, HTTPClient.METHOD_POST, body)
 
 
@@ -20,14 +31,14 @@ func _on_access_req_request_completed(result, response_code, headers, body):
 	if Global.access_token != null:
 		get_tree().change_scene("res://BaseMenu.tscn")
 	else:
-		$status.text = "Wrong username or password"
+		status.text = "Wrong username or password"
 
 
 func got_city_list(result, response_code, headers, body):
 	var cities = JSON.parse(body.get_string_from_utf8()).result
 	if response_code != 200: 
 		print("error on cities request")
-		$status.text = "Press Refresh"
+		status.text = "Press Refresh"
 		return
 	for city in cities:
 		if city.name == "": continue
@@ -39,7 +50,7 @@ func got_school_list(result, response_code, headers, body):
 	var schools = JSON.parse(body.get_string_from_utf8()).result
 	if response_code != 200: 
 		print("error on schools request")
-		$status.text = "Press Refresh"
+		status.text = "Press Refresh"
 		return
 		
 	$SchoolSelector.clear()
@@ -53,7 +64,7 @@ func got_school_list(result, response_code, headers, body):
 
 func school_selected(index):
 	var school = $SchoolSelector.get_at(index)
-	$schooladdress.text = school_urls.get(school)
+	schooladdress.text = school_urls.get(school)
 	$SchoolSelector.hide()
 	step(null,0)
 
@@ -77,8 +88,8 @@ func find_schools():
 
 func step(_text,n):
 	if n == 0:
-		$username.grab_focus()
+		username.grab_focus()
 	elif n == 1:
-		$password.grab_focus()
+		password.grab_focus()
 	elif n == 2:
 		login()
