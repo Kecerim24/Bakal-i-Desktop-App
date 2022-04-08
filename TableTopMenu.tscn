@@ -3,10 +3,11 @@
 [ext_resource path="res://new_theme.tres" type="Theme" id=1]
 
 [node name="ItemList" type="ItemList"]
-margin_left = 98.0
-margin_top = 157.0
-margin_right = 857.0
-margin_bottom = 226.0
+margin_right = 759.0
+margin_bottom = 69.0
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Label0" type="Label" parent="."]
 margin_right = 69.0
