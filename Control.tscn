@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Roboto-Regular.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://login_req.gd" type="Script" id=2]
+[ext_resource path="res://Control_script.gd" type="Script" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 25
@@ -15,9 +16,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = SubResource( 2 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Button" type="Button" parent="."]
 anchor_left = 0.5
@@ -31,40 +29,89 @@ margin_bottom = 94.5
 shortcut_in_tooltip = false
 text = "Login"
 
-[node name="HTTPRequest" type="HTTPRequest" parent="."]
-
-[node name="center" type="VBoxContainer" parent="."]
+[node name="username" type="LineEdit" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -167.5
-margin_top = 108.0
-margin_right = 167.5
-margin_bottom = 148.0
-
-[node name="status" type="RichTextLabel" parent="center"]
-margin_right = 335.0
-margin_bottom = 32.0
-meta_underlined = false
-fit_content_height = true
-scroll_active = false
-
-[node name="username" type="LineEdit" parent="."]
-margin_left = 375.0
-margin_top = 248.0
-margin_right = 649.0
-margin_bottom = 289.0
+margin_left = -137.0
+margin_top = -52.0
+margin_right = 137.0
+margin_bottom = -11.0
+text = "040405zycx"
 placeholder_text = "Username"
 
 [node name="password" type="LineEdit" parent="."]
-margin_left = 375.0
-margin_top = 302.0
-margin_right = 649.0
-margin_bottom = 343.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -137.0
+margin_top = 2.0
+margin_right = 137.0
+margin_bottom = 43.0
+text = "1qpnuxks"
 secret = true
 secret_character = "•"
 placeholder_text = "Password"
 
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -133.0
+margin_top = -282.0
+margin_right = 133.0
+margin_bottom = -69.0
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="city_list" type="OptionButton" parent="."]
+anchor_right = 0.299
+margin_left = 32.0
+margin_top = 33.0
+margin_right = -0.176025
+margin_bottom = 70.0
+
+[node name="school_list" type="OptionButton" parent="."]
+visible = false
+anchor_right = 0.299
+margin_left = 32.0
+margin_top = 98.0
+margin_right = -0.176025
+margin_bottom = 135.0
+text = "School"
+clip_text = true
+
+[node name="status" type="Label" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = 119.0
+margin_bottom = 150.0
+custom_colors/font_color = Color( 0.701961, 0, 0, 1 )
+align = 1
+valign = 1
+
+[node name="access_req" type="HTTPRequest" parent="."]
+
+[node name="school_list_req" type="HTTPRequest" parent="."]
+
+[node name="city_list_req" type="HTTPRequest" parent="."]
+
+[node name="refresh" type="Button" parent="."]
+margin_left = 810.0
+margin_top = 18.0
+margin_right = 993.0
+margin_bottom = 55.0
+text = "Refresh"
+
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
-[connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
+[connection signal="item_selected" from="city_list" to="." method="_on_city_list_item_selected"]
+[connection signal="item_selected" from="school_list" to="." method="_on_school_list_item_selected"]
+[connection signal="request_completed" from="access_req" to="." method="_on_access_req_request_completed"]
+[connection signal="request_completed" from="school_list_req" to="." method="_on_school_list_req_request_completed"]
+[connection signal="request_completed" from="city_list_req" to="." method="_on_city_list_request_completed"]
+[connection signal="pressed" from="refresh" to="." method="_on_refresh_pressed"]

@@ -23,6 +23,10 @@ _global_script_class_icons={
 config/name="bakalari"
 run/main_scene="res://Control.tscn"
 
+[autoload]
+
+Global="*res://global.gd"
+
 [gdnative]
 
 singletons=[ "res://addons/godot-git-plugin/git_api.gdnlib" ]

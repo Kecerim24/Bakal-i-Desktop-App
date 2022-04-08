@@ -1,0 +1,22 @@
+extends Label
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = "text"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var date = OS.get_date(true)
+	var weekday = date.get("weekday")
+	if weekday>5:
+		$".".text = Global.weekdays.get(1)
+	else:
+		$".".text =  Global.weekdays.get(weekday)
+	
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
