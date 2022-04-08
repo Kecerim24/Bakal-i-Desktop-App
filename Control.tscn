@@ -27,6 +27,7 @@ margin_left = -110.0
 margin_top = 113.5
 margin_right = 110.0
 margin_bottom = 150.5
+rect_pivot_offset = Vector2( 110, 18.5 )
 shortcut_in_tooltip = false
 text = "Log in"
 
@@ -39,6 +40,7 @@ margin_left = -137.0
 margin_top = -51.0
 margin_right = 137.0
 margin_bottom = -10.0
+rect_pivot_offset = Vector2( 137, 21 )
 secret_character = "•"
 placeholder_text = "School address"
 
@@ -51,6 +53,7 @@ margin_left = -137.0
 margin_top = 4.0
 margin_right = 137.0
 margin_bottom = 45.0
+rect_pivot_offset = Vector2( 137, 21 )
 placeholder_text = "Username"
 
 [node name="password" type="LineEdit" parent="."]
@@ -62,6 +65,7 @@ margin_left = -137.0
 margin_top = 58.0
 margin_right = 137.0
 margin_bottom = 99.0
+rect_pivot_offset = Vector2( 137, 21 )
 secret = true
 secret_character = "•"
 placeholder_text = "Password"
@@ -75,7 +79,7 @@ margin_left = 148.0
 margin_top = -51.0
 margin_right = 295.0
 margin_bottom = -10.0
-rect_pivot_offset = Vector2( 47, 107 )
+rect_pivot_offset = Vector2( 74, 21 )
 text = "Find school"
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -87,6 +91,7 @@ margin_left = -133.0
 margin_top = -282.0
 margin_right = 133.0
 margin_bottom = -69.0
+rect_pivot_offset = Vector2( 133, 107 )
 texture = ExtResource( 3 )
 expand = true
 stretch_mode = 6
