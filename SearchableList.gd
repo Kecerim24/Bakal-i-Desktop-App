@@ -10,6 +10,7 @@ func add_item(t):
 	b.text = t
 	b.align = ALIGN_BEGIN
 	b.clip_text = true
+	b.hint_tooltip = t
 	b.connect("pressed",self,"emit_signal",["selected",$ScrollList/List.get_child_count()])
 	$ScrollList/List.add_child(b)
 
