@@ -1,0 +1,108 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://new_theme.tres" type="Theme" id=1]
+
+[node name="ItemList" type="ItemList"]
+margin_left = 98.0
+margin_top = 157.0
+margin_right = 857.0
+margin_bottom = 226.0
+
+[node name="Label0" type="Label" parent="."]
+margin_right = 69.0
+margin_bottom = 69.0
+theme = ExtResource( 1 )
+text = "0"
+align = 1
+valign = 1
+
+[node name="Label1" type="Label" parent="."]
+margin_left = 69.0
+margin_right = 138.0
+margin_bottom = 69.0
+rect_pivot_offset = Vector2( 88, 59 )
+theme = ExtResource( 1 )
+text = "1"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 138.0
+margin_right = 207.0
+margin_bottom = 69.0
+theme = ExtResource( 1 )
+text = "2"
+align = 1
+valign = 1
+
+[node name="Label3" type="Label" parent="."]
+margin_left = 207.0
+margin_right = 276.0
+margin_bottom = 69.0
+theme = ExtResource( 1 )
+text = "3"
+align = 1
+valign = 1
+
+[node name="Label4" type="Label" parent="."]
+margin_left = 276.0
+margin_right = 345.0
+margin_bottom = 69.0
+theme = ExtResource( 1 )
+text = "4"
+align = 1
+valign = 1
+
+[node name="Label5" type="Label" parent="."]
+margin_left = 345.0
+margin_right = 414.0
+margin_bottom = 69.0
+theme = ExtResource( 1 )
+text = "5"
+align = 1
+valign = 1
+
+[node name="Label6" type="Label" parent="."]
+margin_left = 414.0
+margin_right = 483.0
+margin_bottom = 69.0
+theme = ExtResource( 1 )
+text = "6"
+align = 1
+valign = 1
+
+[node name="Label7" type="Label" parent="."]
+margin_left = 483.0
+margin_right = 552.0
+margin_bottom = 69.0
+theme = ExtResource( 1 )
+text = "7"
+align = 1
+valign = 1
+
+[node name="Label8" type="Label" parent="."]
+margin_left = 552.0
+margin_right = 621.0
+margin_bottom = 69.0
+theme = ExtResource( 1 )
+text = "8"
+align = 1
+valign = 1
+
+[node name="Label9" type="Label" parent="."]
+margin_left = 621.0
+margin_right = 690.0
+margin_bottom = 69.0
+theme = ExtResource( 1 )
+text = "9"
+align = 1
+valign = 1
+
+[node name="Label10" type="Label" parent="."]
+margin_left = 690.0
+margin_right = 759.0
+margin_bottom = 69.0
+theme = ExtResource( 1 )
+text = "10"
+align = 1
+valign = 1
