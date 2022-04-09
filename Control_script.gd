@@ -57,6 +57,8 @@ func got_school_list(result, response_code, headers, body):
 	yield(get_tree(),"idle_frame")
 	$SchoolSelector.show()
 	$CitySelector.hide()
+	$CitySelector.reset_search()
+	
 	for school in schools.schools:
 		if school.name == "": continue
 		school_urls[school.name] = school.schoolUrl
@@ -66,6 +68,7 @@ func school_selected(index):
 	var school = $SchoolSelector.get_at(index)
 	schooladdress.text = school_urls.get(school)
 	$SchoolSelector.hide()
+	$SchoolSelector.reset_search()
 	step(null,0)
 
 func city_selected(index):

@@ -5,14 +5,21 @@ signal selected(what)
 func clear():
 	for item in $ScrollList/List.get_children(): item.queue_free()
 
+func reset_search():
+	$SearchBar.text = ""
+	search_for("")
+
 func add_item(t):
-	var b = Button.new()
-	b.text = t
-	b.align = ALIGN_BEGIN
-	b.clip_text = true
-	b.hint_tooltip = t
-	b.connect("pressed",self,"emit_signal",["selected",$ScrollList/List.get_child_count()])
-	$ScrollList/List.add_child(b)
+	var button = Button.new()
+	var label = Label.new()
+	label.text = t
+	label.autowrap = true
+	button.anchor_bottom = 1
+	button.anchor_right = 1
+	button.show_behind_parent = true
+	button.connect("pressed",self,"emit_signal",["selected",$ScrollList/List.get_child_count()])
+	$ScrollList/List.add_child(label)
+	label.add_child(button)
 
 func get_at(idx):
 	return $ScrollList/List.get_child(idx).text
