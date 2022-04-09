@@ -29,7 +29,7 @@ func login():
 func _on_access_req_request_completed(result, response_code, headers, body):
 	Global.access_token = Dictionary(JSON.parse(body.get_string_from_utf8()).result).get("access_token")
 	if Global.access_token != null:
-		get_tree().change_scene("res://BaseMenu.tscn")
+		get_tree().change_scene("res://scenes/BaseMenu.tscn")
 	else:
 		status.text = "Wrong username or password"
 
