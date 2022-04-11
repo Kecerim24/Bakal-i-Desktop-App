@@ -1,0 +1,151 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://res/icon.png" type="Texture" id=1]
+[ext_resource path="res://scenes/SearchableList.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/Control_script.gd" type="Script" id=3]
+[ext_resource path="res://res/main_theme.tres" type="Theme" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.933333, 0.933333, 0.933333, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color( 0, 0, 0, 0.152941 )
+shadow_size = 49
+
+[node name="LoginScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 4 )
+script = ExtResource( 3 )
+schooladdress = NodePath("LoginPanel/InputDetails/schooladdress")
+username = NodePath("LoginPanel/InputDetails/username")
+password = NodePath("LoginPanel/InputDetails/password")
+status = NodePath("LoginPanel/status")
+
+[node name="LoginPanel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -307.0
+margin_top = -71.0
+margin_right = 308.0
+margin_bottom = 259.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="InputDetails" type="VBoxContainer" parent="LoginPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -134.5
+margin_top = -129.5
+margin_right = 134.5
+margin_bottom = 10.5
+custom_constants/separation = 10
+
+[node name="schooladdress" type="LineEdit" parent="LoginPanel/InputDetails"]
+margin_right = 269.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 137, 21 )
+secret_character = "•"
+placeholder_text = "School address"
+
+[node name="username" type="LineEdit" parent="LoginPanel/InputDetails"]
+margin_top = 50.0
+margin_right = 269.0
+margin_bottom = 90.0
+rect_pivot_offset = Vector2( 137, 21 )
+placeholder_text = "Username"
+
+[node name="password" type="LineEdit" parent="LoginPanel/InputDetails"]
+margin_top = 100.0
+margin_right = 269.0
+margin_bottom = 140.0
+rect_pivot_offset = Vector2( 137, 21 )
+secret = true
+secret_character = "•"
+placeholder_text = "Password"
+
+[node name="Login" type="Button" parent="LoginPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -110.0
+margin_top = 23.0
+margin_right = 110.0
+margin_bottom = 73.0
+rect_min_size = Vector2( 0, 50 )
+rect_pivot_offset = Vector2( 110, 18.5 )
+shortcut_in_tooltip = false
+text = "Log in"
+
+[node name="status" type="Label" parent="LoginPanel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = -75.0
+margin_right = -8.0
+margin_bottom = -8.0
+custom_colors/font_color = Color( 0.701961, 0, 0, 1 )
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+
+[node name="findschool" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 146.0
+margin_top = -36.0
+margin_right = 294.0
+margin_bottom = 4.0
+rect_pivot_offset = Vector2( 74, 21 )
+text = "Find school"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -133.0
+margin_top = -277.0
+margin_right = 133.0
+margin_bottom = -97.0
+rect_pivot_offset = Vector2( 133, 107 )
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="CitySelector" parent="." instance=ExtResource( 2 )]
+visible = false
+anchor_right = 0.0
+margin_right = 359.0
+
+[node name="SchoolSelector" parent="." instance=ExtResource( 2 )]
+visible = false
+anchor_right = 0.0
+margin_right = 359.0
+
+[node name="access_req" type="HTTPRequest" parent="."]
+
+[node name="school_list_req" type="HTTPRequest" parent="."]
+
+[node name="city_list_req" type="HTTPRequest" parent="."]
+
+[connection signal="text_entered" from="LoginPanel/InputDetails/schooladdress" to="." method="step" binds= [ 0 ]]
+[connection signal="text_entered" from="LoginPanel/InputDetails/username" to="." method="step" binds= [ 1 ]]
+[connection signal="text_entered" from="LoginPanel/InputDetails/password" to="." method="step" binds= [ 2 ]]
+[connection signal="pressed" from="LoginPanel/Login" to="." method="login"]
+[connection signal="pressed" from="findschool" to="." method="find_schools"]
+[connection signal="selected" from="CitySelector" to="." method="city_selected"]
+[connection signal="selected" from="SchoolSelector" to="." method="school_selected"]
+[connection signal="request_completed" from="access_req" to="." method="_on_access_req_request_completed"]
+[connection signal="request_completed" from="school_list_req" to="." method="got_school_list"]
+[connection signal="request_completed" from="city_list_req" to="." method="got_city_list"]
